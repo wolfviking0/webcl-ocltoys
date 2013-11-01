@@ -69,7 +69,7 @@ jugCLer_sample:
 	-I../common/ \
 	-I$(BOOST)/ \
 	--preload-file trace.cl \
-	-o ../../build/jugCLer.js
+	-o ../../build/toys_jugCLer.js
 
 juliagpu_sample:
 	$(call chdir,ocltoys-v1.0/juliagpu/)
@@ -81,7 +81,7 @@ juliagpu_sample:
 	-I../common/ \
 	-I$(BOOST)/ \
 	--preload-file rendering_kernel.cl \
-	-o ../../build/juliagpu.js
+	-o ../../build/toys_juliagpu.js
 	
 mandelgpu_sample:
 	$(call chdir,ocltoys-v1.0/mandelgpu/)
@@ -94,7 +94,7 @@ mandelgpu_sample:
 	-I$(BOOST)/ \
 	--preload-file rendering_kernel_float4.cl \
 	--preload-file rendering_kernel.cl \
-	-o ../../build/mandelgpu.js
+	-o ../../build/toys_mandelgpu.js
 
 smallptgpu_sample:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
@@ -113,7 +113,7 @@ smallptgpu_sample:
 	--preload-file scenes/cornell_sss.scn \
 	--preload-file scenes/cornell.scn \
 	--preload-file scenes/simple.scn \
-	-o ../../build/smallptgpu.js
+	-o ../../build/toys_smallptgpu.js
 
 smallptgpu_sample_osx:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
