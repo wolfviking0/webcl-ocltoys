@@ -1,4 +1,5 @@
-EMCC:=/Volumes/APPLE_MEDIA/WORKSPACE/webcl/webcl-translator/emscripten
+EMCC:=../webcl-translator/emscripten
+BOOST:=../../../boost_1_54_0
 
 EMSCRIPTEN = $(EMCC)
 CXX = $(EMSCRIPTEN)/emcc
@@ -35,20 +36,20 @@ $(info )
 #----------------------------------------------------------------------------------------#		
 
 BOOST_SRC = \
-		../../boost_1_54_0/libs/system/src/error_code.cpp \
-		../../boost_1_54_0/libs/program_options/src/options_description.cpp \
-		../../boost_1_54_0/libs/program_options/src/cmdline.cpp \
-		../../boost_1_54_0/libs/program_options/src/variables_map.cpp \
-		../../boost_1_54_0/libs/program_options/src/value_semantic.cpp \
-		../../boost_1_54_0/libs/program_options/src/positional_options.cpp \
-		../../boost_1_54_0/libs/program_options/src/convert.cpp \
-		../../boost_1_54_0/libs/regex/src/regex.cpp \
-		../../boost_1_54_0/libs/regex/src/cpp_regex_traits.cpp \
-		../../boost_1_54_0/libs/regex/src/regex_raw_buffer.cpp \
-		../../boost_1_54_0/libs/regex/src/regex_traits_defaults.cpp \
-		../../boost_1_54_0/libs/regex/src/static_mutex.cpp \
-		../../boost_1_54_0/libs/regex/src/instances.cpp \
-		../../boost_1_54_0/libs/filesystem/src/operations.cpp \
+		$(BOOST)/libs/system/src/error_code.cpp \
+		$(BOOST)/libs/program_options/src/options_description.cpp \
+		$(BOOST)/libs/program_options/src/cmdline.cpp \
+		$(BOOST)/libs/program_options/src/variables_map.cpp \
+		$(BOOST)/libs/program_options/src/value_semantic.cpp \
+		$(BOOST)/libs/program_options/src/positional_options.cpp \
+		$(BOOST)/libs/program_options/src/convert.cpp \
+		$(BOOST)/libs/regex/src/regex.cpp \
+		$(BOOST)/libs/regex/src/cpp_regex_traits.cpp \
+		$(BOOST)/libs/regex/src/regex_raw_buffer.cpp \
+		$(BOOST)/libs/regex/src/regex_traits_defaults.cpp \
+		$(BOOST)/libs/regex/src/static_mutex.cpp \
+		$(BOOST)/libs/regex/src/instances.cpp \
+		$(BOOST)/libs/filesystem/src/operations.cpp \
 
 COMMON_SRC = \
 		../common/ocltoy.cpp \
@@ -66,7 +67,7 @@ jugCLer_sample:
 		$(BOOST_SRC) \
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I../../boost_1_54_0/ \
+	-I$(BOOST)/ \
 	--preload-file trace.cl \
 	-o ../../build/jugCLer.js
 
@@ -78,7 +79,7 @@ juliagpu_sample:
 		$(BOOST_SRC) \
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I../../boost_1_54_0/ \
+	-I$(BOOST)/ \
 	--preload-file rendering_kernel.cl \
 	-o ../../build/juliagpu.js
 	
@@ -90,7 +91,7 @@ mandelgpu_sample:
 		$(BOOST_SRC) \
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I../../boost_1_54_0/ \
+	-I$(BOOST)/ \
 	--preload-file rendering_kernel_float4.cl \
 	--preload-file rendering_kernel.cl \
 	-o ../../build/mandelgpu.js
@@ -103,7 +104,7 @@ smallptgpu_sample:
 		$(BOOST_SRC) \
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I../../boost_1_54_0/ \
+	-I$(BOOST)/ \
 	--preload-file preprocessed_rendering_kernel.cl \
 	--preload-file scenes/caustic.scn \
 	--preload-file scenes/caustic3.scn \
@@ -122,7 +123,7 @@ smallptgpu_sample_osx:
 		$(BOOST_SRC) \
 		-D__EMSCRIPTEN__ \
 		-I../common/ \
-		-I../../boost_1_54_0/ \
+		-I$(BOOST)/ \
 		-I ./ -I $(EMCC)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
 		-lboost_filesystem-mt -lboost_program_options-mt \
 		-o smallptgpu.out
