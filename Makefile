@@ -1,4 +1,4 @@
-EMCC:=../webcl-translator/emscripten
+EMCC:=../../../webcl-translator/emscripten
 BOOST:=../../../boost_1_54_0
 
 EMSCRIPTEN = $(EMCC)
@@ -58,7 +58,7 @@ COMMON_SRC = \
 all: jugCLer_sample juliagpu_sample mandelgpu_sample smallptgpu_sample
 
 jugCLer_sample:
-	$(call chdir,ocltoys/jugCLer/)
+	$(call chdir,ocltoys-v1.0/jugCLer/)
 	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
 		animation.cpp \
 		jugCLer.cpp \
@@ -72,7 +72,7 @@ jugCLer_sample:
 	-o ../../build/jugCLer.js
 
 juliagpu_sample:
-	$(call chdir,ocltoys/juliagpu/)
+	$(call chdir,ocltoys-v1.0/juliagpu/)
 	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
 		juliagpu.cpp \
 		$(COMMON_SRC) \
@@ -84,7 +84,7 @@ juliagpu_sample:
 	-o ../../build/juliagpu.js
 	
 mandelgpu_sample:
-	$(call chdir,ocltoys/mandelgpu/)
+	$(call chdir,ocltoys-v1.0/mandelgpu/)
 	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
 		mandelgpu.cpp \
 		$(COMMON_SRC) \
@@ -97,7 +97,7 @@ mandelgpu_sample:
 	-o ../../build/mandelgpu.js
 
 smallptgpu_sample:
-	$(call chdir,ocltoys/smallptgpu/)
+	$(call chdir,ocltoys-v1.0/smallptgpu/)
 	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
 		smallptgpu.cpp \
 		$(COMMON_SRC) \
@@ -116,7 +116,7 @@ smallptgpu_sample:
 	-o ../../build/smallptgpu.js
 
 smallptgpu_sample_osx:
-	$(call chdir,ocltoys/smallptgpu/)
+	$(call chdir,ocltoys-v1.0/smallptgpu/)
 	clang++ \
 		smallptgpu.cpp \
 		$(COMMON_SRC) \
