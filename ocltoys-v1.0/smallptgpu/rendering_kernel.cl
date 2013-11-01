@@ -521,3 +521,25 @@ __kernel void ToneMapping(
 	pixel->y = toColor(sample->y);
 	pixel->z = toColor(sample->z);
 }
+
+__kernel void WebCLToneMapping(
+	__global Vec *samples, __global int *pixels,
+	const unsigned int width, const unsigned int height) {
+	const int gid = get_global_id(0);
+	// Check if we have to do something
+	if (gid >= width * height)
+		return;
+
+	__global Vec *sample = &samples[gid];
+
+	const unsigned int x = gid % width;
+	const unsigned int y = height - gid / width - 1;
+	__global int *pixel = &pixels[x + y * width];
+	const float r = toColor(sample->x);
+	const float g = toColor(sample->y);
+	const float b = toColor(sample->z);
+	const int ur = (int)(r * 255.f + .5f);
+	const int ug = (int)(g * 255.f + .5f);
+	const int ub = (int)(b * 255.f + .5f);
+	*pixel = ur | (ug << 8) | (ub << 16) | (0xff << 24);
+}
