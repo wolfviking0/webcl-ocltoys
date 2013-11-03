@@ -80,9 +80,10 @@ juliagpu_sample:
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
+	--preload-file preprocessed_rendering_kernel.cl \
 	--preload-file rendering_kernel.cl \
 	-o ../../build/toys_juliagpu.js
-	
+
 mandelgpu_sample:
 	$(call chdir,ocltoys-v1.0/mandelgpu/)
 	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
@@ -115,6 +116,19 @@ smallptgpu_sample:
 	--preload-file scenes/simple.scn \
 	-o ../../build/toys_smallptgpu.js
 
+juliagpu_sample_osx:
+	$(call chdir,ocltoys-v1.0/juliagpu/)
+	clang++ \
+		juliagpu.cpp \
+		$(COMMON_SRC) \
+		$(BOOST_SRC) \
+		-D__EMSCRIPTEN__ \
+		-I../common/ \
+		-I$(BOOST)/ \
+		-I ./ -I $(EMCC)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
+		-lboost_filesystem-mt -lboost_program_options-mt \
+		-o juliagpu.out
+		
 smallptgpu_sample_osx:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
 	clang++ \
