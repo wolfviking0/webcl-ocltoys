@@ -1,5 +1,5 @@
 EMCC:=../../../webcl-translator/emscripten
-BOOST:=../../../boost_1_54_0
+BOOST:=../../../boost_1_55_0
 
 EMSCRIPTEN = $(EMCC)
 CXX = $(EMSCRIPTEN)/emcc
@@ -103,7 +103,7 @@ smallptgpu_sample:
 		smallptgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
-	$(MODE) -s LEGACY_GL_EMULATION=1 \
+	$(MODE) -s LEGACY_GL_EMULATION=1 -s TOTAL_MEMORY=1024*1024*100 \
 	-I../common/ \
 	-I$(BOOST)/ \
 	--preload-file preprocessed_rendering_kernel.cl \
