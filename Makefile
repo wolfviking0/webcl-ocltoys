@@ -14,10 +14,21 @@ define chdir
 endef
 
 DEB=0
+VAL=0
 
-DEBUG = -O0 -s OPENCL_PRINT_TRACE=1 -s DISABLE_EXCEPTION_CATCHING=0 -s OPENCL_OLD_VERSION=0 -s WARN_ON_UNDEFINED_SYMBOLS=1 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=1 -s OPENCL_GRAB_TRACE=1 -s OPENCL_CHECK_SET_POINTER=1 -s OPENCL_CHECK_VALID_OBJECT=1
+ifeq ($(VAL),1)
+PRELOAD = --preload-file-validator
+PREFIX = "val_"
+$(info ************  Mode VALIDATOR : Enabled ************)
+else
+PRELOAD = --preload-file
+PREFIX = ""
+$(info ************  Mode VALIDATOR : Disabled ************)
+endif
 
-NO_DEBUG = -03 -s OPENCL_OLD_VERSION=0 -s WARN_ON_UNDEFINED_SYMBOLS=0 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=0 -s OPENCL_GRAB_TRACE=0 -s OPENCL_PRINT_TRACE=0 -s OPENCL_CHECK_SET_POINTER=0 -s OPENCL_CHECK_VALID_OBJECT=0
+DEBUG = -O0 -s OPENCL_VALIDATOR=$(VAL) -s OPENCL_PRINT_TRACE=1 -s DISABLE_EXCEPTION_CATCHING=0 -s WARN_ON_UNDEFINED_SYMBOLS=1 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=1 -s OPENCL_GRAB_TRACE=1 -s OPENCL_CHECK_VALID_OBJECT=1
+
+NO_DEBUG = -03 -s OPENCL_VALIDATOR=$(VAL) -s WARN_ON_UNDEFINED_SYMBOLS=0 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=0 -s OPENCL_GRAB_TRACE=0 -s OPENCL_PRINT_TRACE=0 -s OPENCL_CHECK_VALID_OBJECT=0
 
 ifeq ($(DEB),1)
 MODE=$(DEBUG)
@@ -26,6 +37,7 @@ else
 MODE=$(NO_DEBUG)
 $(info ************  Mode DEBUG : Disabled ************)
 endif
+
 $(info )
 $(info )
 
@@ -68,8 +80,8 @@ jugCLer_sample:
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	--preload-file trace.cl \
-	-o ../../build/toys_jugCLer.js
+	$(PRELOAD) trace.cl \
+	-o ../../build/$(PREFIX)toys_jugCLer.js
 
 juliagpu_sample:
 	$(call chdir,ocltoys-v1.0/juliagpu/)
@@ -80,9 +92,9 @@ juliagpu_sample:
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	--preload-file preprocessed_rendering_kernel.cl \
-	--preload-file rendering_kernel.cl \
-	-o ../../build/toys_juliagpu.js
+	$(PRELOAD) preprocessed_rendering_kernel.cl \
+	$(PRELOAD) rendering_kernel.cl \
+	-o ../../build/$(PREFIX)toys_juliagpu.js
 
 mandelgpu_sample:
 	$(call chdir,ocltoys-v1.0/mandelgpu/)
@@ -93,9 +105,9 @@ mandelgpu_sample:
 	$(MODE) -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	--preload-file rendering_kernel_float4.cl \
-	--preload-file rendering_kernel.cl \
-	-o ../../build/toys_mandelgpu.js
+	$(PRELOAD) rendering_kernel_float4.cl \
+	$(PRELOAD) rendering_kernel.cl \
+	-o ../../build/$(PREFIX)toys_mandelgpu.js
 
 smallptgpu_sample:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
@@ -106,7 +118,7 @@ smallptgpu_sample:
 	$(MODE) -s LEGACY_GL_EMULATION=1 -s TOTAL_MEMORY=1024*1024*100 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	--preload-file preprocessed_rendering_kernel.cl \
+	$(PRELOAD) preprocessed_rendering_kernel.cl \
 	--preload-file scenes/caustic.scn \
 	--preload-file scenes/caustic3.scn \
 	--preload-file scenes/cornell_fog.scn \
@@ -114,7 +126,7 @@ smallptgpu_sample:
 	--preload-file scenes/cornell_sss.scn \
 	--preload-file scenes/cornell.scn \
 	--preload-file scenes/simple.scn \
-	-o ../../build/toys_smallptgpu.js
+	-o ../../build/$(PREFIX)toys_smallptgpu.js
 
 juliagpu_sample_osx:
 	$(call chdir,ocltoys-v1.0/juliagpu/)
