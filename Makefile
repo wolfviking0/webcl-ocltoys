@@ -71,7 +71,7 @@ all: jugCLer_sample juliagpu_sample mandelgpu_sample smallptgpu_sample
 
 jugCLer_sample:
 	$(call chdir,ocltoys-v1.0/jugCLer/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
+	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
 		animation.cpp \
 		jugCLer.cpp \
 		scene.cpp \
@@ -85,7 +85,7 @@ jugCLer_sample:
 
 juliagpu_sample:
 	$(call chdir,ocltoys-v1.0/juliagpu/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
+	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
 		juliagpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
@@ -98,7 +98,7 @@ juliagpu_sample:
 
 mandelgpu_sample:
 	$(call chdir,ocltoys-v1.0/mandelgpu/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
+	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
 		mandelgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
@@ -111,7 +111,7 @@ mandelgpu_sample:
 
 smallptgpu_sample:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=1 $(CXX) \
+	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
 		smallptgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
