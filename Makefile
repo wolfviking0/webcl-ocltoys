@@ -165,5 +165,5 @@ clean:
 	cp tmp/memoryprofiler.js ./
 	cp tmp/settings.js ./
 	rm -rf tmp/
-	$(CXX) --clear-cache
+	../../webcl-translator/emscripten/emcc --clear-cache
 
