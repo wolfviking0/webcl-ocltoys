@@ -104,7 +104,7 @@ int OCLToy::Run(int argc, char **argv) {
 		boost::program_options::options_description genericOpts("Generic options");
 		genericOpts.add_options()
 			("help,h", "Display this help and exit")
-			("width,w", boost::program_options::value<int>()->default_value(1024), "Window width")
+			("width,w", boost::program_options::value<int>()->default_value(512), "Window width")
 			("height,e", boost::program_options::value<int>()->default_value(512), "Window height")
 			("directory,d", boost::program_options::value<std::string>(), "Current directory path")
 			("ocldevices,o", boost::program_options::value<std::string>()->default_value("ALL"),

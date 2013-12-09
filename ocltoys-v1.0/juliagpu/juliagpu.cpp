@@ -256,6 +256,13 @@ protected:
 #ifndef __EMSCRIPTEN__
 		glRasterPos2i(0, 0);
 		glDrawPixels(config.width, config.height, GL_RGB, GL_FLOAT, pixels);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glColor4f(0.f, 0.f, 0.f, 0.8f);
+		glRecti(0, windowHeight - 15,
+				windowWidth - 1, windowHeight - 1);
+		glDisable(GL_BLEND);		
 #else
 	    glDisable( GL_LIGHTING );
 	 
@@ -288,13 +295,6 @@ protected:
 	    glDisable( TextureTarget );
 	    glBindTexture( TextureTarget, 0 );
 #endif		
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glColor4f(0.f, 0.f, 0.f, 0.8f);
-		glRecti(0, windowHeight - 15,
-				windowWidth - 1, windowHeight - 1);
-		glDisable(GL_BLEND);
-
 #ifndef __EMSCRIPTEN__
 		// Title
 		glColor3f(1.f, 1.f, 1.f);
