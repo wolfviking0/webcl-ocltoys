@@ -17,12 +17,10 @@ DEB=0
 VAL=0
 
 ifeq ($(VAL),1)
-PRELOAD = --preload-file-validator
-PREFIX = "val_"
+PREFIX = val_
 $(info ************  Mode VALIDATOR : Enabled ************)
 else
-PRELOAD = --preload-file
-PREFIX = ""
+PREFIX = 
 $(info ************  Mode VALIDATOR : Disabled ************)
 endif
 
@@ -77,10 +75,10 @@ jugCLer_sample:
 		scene.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
-	$(MODE) -s LEGACY_GL_EMULATION=1 \
+	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	$(PRELOAD) trace.cl \
+	--preload-file trace.cl \
 	-o ../../build/$(PREFIX)toys_jugCLer.js
 
 juliagpu_sample:
@@ -89,11 +87,11 @@ juliagpu_sample:
 		juliagpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
-	$(MODE) -s LEGACY_GL_EMULATION=1 \
+	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	$(PRELOAD) preprocessed_rendering_kernel.cl \
-	$(PRELOAD) rendering_kernel.cl \
+	--preload-file preprocessed_rendering_kernel.cl \
+	--preload-file rendering_kernel.cl \
 	-o ../../build/$(PREFIX)toys_juliagpu.js
 
 mandelgpu_sample:
@@ -102,11 +100,11 @@ mandelgpu_sample:
 		mandelgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
-	$(MODE) -s LEGACY_GL_EMULATION=1 \
+	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	$(PRELOAD) rendering_kernel_float4.cl \
-	$(PRELOAD) rendering_kernel.cl \
+	--preload-file rendering_kernel_float4.cl \
+	--preload-file rendering_kernel.cl \
 	-o ../../build/$(PREFIX)toys_mandelgpu.js
 
 smallptgpu_sample:
@@ -115,10 +113,10 @@ smallptgpu_sample:
 		smallptgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
-	$(MODE) -s LEGACY_GL_EMULATION=1 -s TOTAL_MEMORY=1024*1024*100 \
+	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 -s TOTAL_MEMORY=1024*1024*100 \
 	-I../common/ \
 	-I$(BOOST)/ \
-	$(PRELOAD) preprocessed_rendering_kernel.cl \
+	--preload-file preprocessed_rendering_kernel.cl \
 	--preload-file scenes/caustic.scn \
 	--preload-file scenes/caustic3.scn \
 	--preload-file scenes/cornell_fog.scn \
