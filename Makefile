@@ -1,3 +1,10 @@
+#
+#  Makefile
+#
+#  Created by Anthony Liot.
+#  Copyright (c) 2013 Anthony Liot. All rights reserved.
+#
+
 EMCC:=../../../webcl-translator/emscripten
 BOOST:=../../../boost_1_55_0
 
