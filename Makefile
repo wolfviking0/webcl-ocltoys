@@ -33,13 +33,15 @@ endif
 
 DEBUG = -O0 -s OPENCL_VALIDATOR=$(VAL) -s OPENCL_PRINT_TRACE=1 -s DISABLE_EXCEPTION_CATCHING=0 -s WARN_ON_UNDEFINED_SYMBOLS=1 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=1 -s OPENCL_GRAB_TRACE=1 -s OPENCL_CHECK_VALID_OBJECT=1
 
-NO_DEBUG = -03 -s OPENCL_VALIDATOR=$(VAL) -s WARN_ON_UNDEFINED_SYMBOLS=0 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=0 -s OPENCL_GRAB_TRACE=0 -s OPENCL_PRINT_TRACE=0 -s OPENCL_CHECK_VALID_OBJECT=0
+NO_DEBUG = -02 -s OPENCL_VALIDATOR=$(VAL) -s WARN_ON_UNDEFINED_SYMBOLS=0 -s OPENCL_PROFILE=1 -s OPENCL_DEBUG=0 -s OPENCL_GRAB_TRACE=0 -s OPENCL_PRINT_TRACE=0 -s OPENCL_CHECK_VALID_OBJECT=0
 
 ifeq ($(DEB),1)
 MODE=$(DEBUG)
+EMCCDEBUG = EMCC_DEBUG
 $(info ************  Mode DEBUG : Enabled ************)
 else
 MODE=$(NO_DEBUG)
+EMCCDEBUG = EMCCDEBUG
 $(info ************  Mode DEBUG : Disabled ************)
 endif
 
@@ -76,7 +78,7 @@ all: jugCLer_sample juliagpu_sample mandelgpu_sample smallptgpu_sample
 
 jugCLer_sample:
 	$(call chdir,ocltoys-v1.0/jugCLer/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
+	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		animation.cpp \
 		jugCLer.cpp \
 		scene.cpp \
@@ -90,7 +92,7 @@ jugCLer_sample:
 
 juliagpu_sample:
 	$(call chdir,ocltoys-v1.0/juliagpu/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
+	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		juliagpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
@@ -103,7 +105,7 @@ juliagpu_sample:
 
 mandelgpu_sample:
 	$(call chdir,ocltoys-v1.0/mandelgpu/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
+	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		mandelgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
@@ -116,7 +118,7 @@ mandelgpu_sample:
 
 smallptgpu_sample:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
-	JAVA_HEAP_SIZE=8096m EMCC_DEBUG=$(DEB) $(CXX) \
+	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		smallptgpu.cpp \
 		$(COMMON_SRC) \
 		$(BOOST_SRC) \
