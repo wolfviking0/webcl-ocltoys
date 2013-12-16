@@ -25,7 +25,7 @@ VAL=0
 
 ifeq ($(VAL),1)
 PREFIX = val_
-VALIDATOR = '[""]' # Enable validator without parameter
+VALIDATOR = '["-DPARAM_MAX_DEPTH","-DPARAM_DEFAULT_SIGMA_S","-DPARAM_DEFAULT_SIGMA_A"]' # Enable validator without parameter
 $(info ************  Mode VALIDATOR : Enabled ************)
 else
 PREFIX = 
