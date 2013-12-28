@@ -79,9 +79,10 @@ COMMON_SRC = \
 all: build_lib all_1 all_2 all_3
 
 all_1: \
-	jugCLer_sample \
+	build_lib \
 
 all_2: \
+	jugCLer_sample \	
 	juliagpu_sample \
 
 all_3: \
