@@ -82,7 +82,7 @@ all_1: \
 	build_lib \
 
 all_2: \
-	jugCLer_sample \	
+	jugCLer_sample \
 	juliagpu_sample \
 
 all_3: \
