@@ -73,8 +73,8 @@ BOOST_SRC = \
 		$(BOOST)/libs/filesystem/src/operations.cpp \
 
 COMMON_SRC = \
-		../common/ocltoy.cpp \
-		../common/utils.cpp \
+		../../ocltoys-v1.0/common/ocltoy.cpp \
+		../../ocltoys-v1.0/common/utils.cpp \
 
 all: build_lib all_1 all_2 all_3
 
@@ -89,9 +89,9 @@ all_3: \
 	smallptgpu_sample \
 
 build_lib:
-	$(call chdir,ocltoys-v1.0/libs/)
-	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) $(COMMON_SRC) -I$(BOOST) -I../common/ -o libcommon.o
-	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) $(BOOST_SRC) -I$(BOOST)/ -o libboost.o	
+	$(call chdir,externs/lib/)
+	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) $(COMMON_SRC) -I$(BOOST) -I../../ocltoys-v1.0/common/ -o libcommon.o
+	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) $(BOOST_SRC) -I../../externs/include/ -o libboost.o	
 
 jugCLer_sample:
 	$(call chdir,ocltoys-v1.0/jugCLer/)
@@ -99,11 +99,11 @@ jugCLer_sample:
 		animation.cpp \
 		jugCLer.cpp \
 		scene.cpp \
-		../libs/libcommon.o \
-		../libs/libboost.o \
+		../../externs/lib/libcommon.o \
+		../../externs/lib/libboost.o \
 	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I$(BOOST)/ \
+	-I../../externs/include/ \
 	--preload-file trace.cl \
 	-o ../../build/$(PREFIX)toys_jugCLer.js
 
@@ -111,11 +111,11 @@ juliagpu_sample:
 	$(call chdir,ocltoys-v1.0/juliagpu/)
 	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		juliagpu.cpp \
-		../libs/libcommon.o \
-		../libs/libboost.o \
+		../../externs/lib/libcommon.o \
+		../../externs/lib/libboost.o \
 	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I$(BOOST)/ \
+	-I../../externs/include/ \
 	--preload-file preprocessed_rendering_kernel.cl \
 	--preload-file rendering_kernel.cl \
 	-o ../../build/$(PREFIX)toys_juliagpu.js
@@ -124,11 +124,11 @@ mandelgpu_sample:
 	$(call chdir,ocltoys-v1.0/mandelgpu/)
 	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		mandelgpu.cpp \
-		../libs/libcommon.o \
-		../libs/libboost.o \
+		../../externs/lib/libcommon.o \
+		../../externs/lib/libboost.o \
 	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 \
 	-I../common/ \
-	-I$(BOOST)/ \
+	-I../../externs/include/ \
 	--preload-file rendering_kernel_float4.cl \
 	--preload-file rendering_kernel.cl \
 	-o ../../build/$(PREFIX)toys_mandelgpu.js
@@ -137,11 +137,11 @@ smallptgpu_sample:
 	$(call chdir,ocltoys-v1.0/smallptgpu/)
 	JAVA_HEAP_SIZE=8096m $(EMCCDEBUG)=1 $(CXX) \
 		smallptgpu.cpp \
-		../libs/libcommon.o \
-		../libs/libboost.o \
+		../../externs/lib/libcommon.o \
+		../../externs/lib/libboost.o \
 	$(MODE) -s GL_FFP_ONLY=1 -s LEGACY_GL_EMULATION=1 -s TOTAL_MEMORY=1024*1024*100 \
 	-I../common/ \
-	-I$(BOOST)/ \
+	-I../../externs/include/ \
 	--preload-file preprocessed_rendering_kernel.cl \
 	--preload-file scenes/caustic.scn \
 	--preload-file scenes/caustic3.scn \
@@ -160,7 +160,7 @@ juliagpu_sample_osx:
 		$(BOOST_SRC) \
 		-D__EMSCRIPTEN__ \
 		-I../common/ \
-		-I$(BOOST)/ \
+		-I../../externs/include/ \
 		-I ./ -I $(EMCC)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
 		-lboost_filesystem-mt -lboost_program_options-mt \
 		-o juliagpu.out
@@ -173,7 +173,7 @@ smallptgpu_sample_osx:
 		$(BOOST_SRC) \
 		-D__EMSCRIPTEN__ \
 		-I../common/ \
-		-I$(BOOST)/ \
+		-I../../externs/include/ \
 		-I ./ -I $(EMCC)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
 		-lboost_filesystem-mt -lboost_program_options-mt \
 		-o smallptgpu.out
