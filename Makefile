@@ -76,7 +76,7 @@ COMMON_SRC = \
 		../../ocltoys-v1.0/common/ocltoy.cpp \
 		../../ocltoys-v1.0/common/utils.cpp \
 
-all: build_lib all_1 all_2 all_3
+all: all_1 all_2 all_3
 
 all_1: \
 	jugCLer_sample \
