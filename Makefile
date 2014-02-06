@@ -5,14 +5,13 @@
 #  Copyright (c) 2013 Anthony Liot. All rights reserved.
 #
 
-EMCC:=../../../webcl-translator/emscripten
-BOOST:=../../../boost
+CURRENT_ROOT:=$(PWD)/
 
-EMSCRIPTEN = $(EMCC)
-CXX = $(EMSCRIPTEN)/emcc
-AR = $(EMSCRIPTEN)/emar
-EMCONFIGURE = $(EMSCRIPTEN)/emconfigure
-EMMAKE = $(EMSCRIPTEN)/emmake
+EMSCRIPTEN_ROOT:=$(CURRENT_ROOT)../webcl-translator/emscripten
+
+CXX = $(EMSCRIPTEN_ROOT)/em++
+
+BOOST:=../../../boost
 
 CHDIR_SHELL := $(SHELL)
 define chdir
@@ -190,5 +189,5 @@ clean:
 	cp tmp/memoryprofiler.js ./
 	cp tmp/settings.js ./
 	rm -rf tmp/
-	../../webcl-translator/emscripten/emcc --clear-cache
+	$(CXX) --clear-cache
 
