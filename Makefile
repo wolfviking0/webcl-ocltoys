@@ -11,6 +11,17 @@ ORIG=0
 ifeq ($(ORIG),1)
 EMSCRIPTEN_ROOT:=$(CURRENT_ROOT)../emscripten
 else
+
+$(info )
+$(info )
+$(info *************************************************************)
+$(info *************************************************************)
+$(info ************ /!\ BUILD USE SUBMODULE CAREFUL /!\ ************)
+$(info *************************************************************)
+$(info *************************************************************)
+$(info )
+$(info )
+
 EMSCRIPTEN_ROOT:=$(CURRENT_ROOT)../webcl-translator/emscripten
 endif
 
