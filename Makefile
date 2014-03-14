@@ -49,9 +49,9 @@ VALIDATOR = '[]' # disable validator
 $(info ************  Mode VALIDATOR : Disabled ************)
 endif
 
-DEBUG = -O0 -s CL_VALIDATOR=$(VAL) -s CL_VAL_PARAM=$(VALIDATOR) -s CL_PRINT_TRACE=1 -s DISABLE_EXCEPTION_CATCHING=0 -s WARN_ON_UNDEFINED_SYMBOLS=1 -s CL_DEBUG=1 -s CL_GRAB_TRACE=1 -s CL_CHECK_VALID_OBJECT=1
+DEBUG = -O0 -s CL_VALIDATOR=$(VAL) -s CL_VAL_PARAM=$(VALIDATOR) -s CL_PRINT_TRACE=1 -s DISABLE_EXCEPTION_CATCHING=0 -s WARN_ON_UNDEFINED_SYMBOLS=1 -s CL_DEBUG=1 -s CL_GRAB_TRACE=1 -s CL_CHECK_VALID_OBJECT=1 -s ASSERTIONS=2
 
-NO_DEBUG = -02 -s CL_VALIDATOR=$(VAL) -s CL_VAL_PARAM=$(VALIDATOR) -s WARN_ON_UNDEFINED_SYMBOLS=0  -s CL_DEBUG=0 -s CL_GRAB_TRACE=0 -s CL_PRINT_TRACE=0 -s CL_CHECK_VALID_OBJECT=0
+NO_DEBUG = -02 -s CL_VALIDATOR=$(VAL) -s CL_VAL_PARAM=$(VALIDATOR) -s WARN_ON_UNDEFINED_SYMBOLS=0  -s CL_DEBUG=0 -s CL_GRAB_TRACE=0 -s CL_PRINT_TRACE=0 -s CL_CHECK_VALID_OBJECT=0 -s ASSERTIONS=2
 
 ifeq ($(DEB),1)
 MODE=$(DEBUG)
@@ -80,6 +80,7 @@ BOOST_SRC = \
 		$(BOOST)/libs/program_options/src/value_semantic.cpp \
 		$(BOOST)/libs/program_options/src/positional_options.cpp \
 		$(BOOST)/libs/program_options/src/convert.cpp \
+		$(BOOST)/libs/program_options/src/utf8_codecvt_facet.cpp \
 		$(BOOST)/libs/regex/src/regex.cpp \
 		$(BOOST)/libs/regex/src/cpp_regex_traits.cpp \
 		$(BOOST)/libs/regex/src/regex_raw_buffer.cpp \
@@ -95,6 +96,7 @@ COMMON_SRC = \
 all: all_1 all_2 all_3
 
 all_1: \
+	build_lib \
 	jugCLer_sample \
 
 all_2: \
