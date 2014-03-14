@@ -39,7 +39,12 @@
 #else
 #include <GL/glut.h>
 #endif
-
+#ifdef __EMSCRIPTEN__
+#undef GLUT_BITMAP_8_BY_13
+#define GLUT_BITMAP_8_BY_13 (void*)"GLUT_BITMAP_8_BY_13"
+#undef GLUT_BITMAP_9_BY_15
+#define GLUT_BITMAP_9_BY_15 (void*)"GLUT_BITMAP_9_BY_15"
+#endif
 extern std::string OCLErrorString(cl_int error);
 extern std::string OCLLocalMemoryTypeString(cl_device_local_mem_type type);
 extern std::string OCLDeviceTypeString(cl_device_type type);

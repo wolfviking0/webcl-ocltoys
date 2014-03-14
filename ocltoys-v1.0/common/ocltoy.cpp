@@ -92,7 +92,7 @@ int OCLToy::Run(int argc, char **argv) {
 	std::set_terminate(OCLToyTerminate);
 #endif
 
-	try {
+	//wtry {
 		OCLTOY_LOG(windowTitle);
 
 		//----------------------------------------------------------------------
@@ -159,16 +159,16 @@ int OCLToy::Run(int argc, char **argv) {
 		//----------------------------------------------------------------------
 
 		return RunToy();
-	} catch (cl::Error err) {
-		OCLTOY_LOG("OpenCL ERROR: " << err.what() << "(" << OCLErrorString(err.err()) << ")");
-		return EXIT_FAILURE;
-	} catch (std::runtime_error err) {
-		OCLTOY_LOG("RUNTIME ERROR: " << err.what());
-		return EXIT_FAILURE;
-	} catch (std::exception err) {
-		OCLTOY_LOG("ERROR: " << err.what());
-		return EXIT_FAILURE;
-	}
+	//} catch (cl::Error err) {
+	//	OCLTOY_LOG("OpenCL ERROR: " << err.what() << "(" << OCLErrorString(err.err()) << ")");
+	//	return EXIT_FAILURE;
+	//} catch (std::runtime_error err) {
+	//	OCLTOY_LOG("RUNTIME ERROR: " << err.what());
+	//	return EXIT_FAILURE;
+	//} catch (std::exception err) {
+	//	OCLTOY_LOG("ERROR: " << err.what());
+	//	return EXIT_FAILURE;
+	//}
 }
 
 //------------------------------------------------------------------------------

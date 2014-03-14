@@ -1052,7 +1052,7 @@ private:
 	}
 
 	static void RenderThreadImpl(SmallPTGPU *smallptgpu, const unsigned int threadIndex) {
-		try {
+		//try {
 			#ifndef USE_THREAD
 			static size_t globalThreads = smallptgpu->windowWidth * smallptgpu->windowHeight;
 			if (globalThreads % smallptgpu->kernelsWorkGroupSize[threadIndex] != 0)
@@ -1129,13 +1129,13 @@ private:
 					kernelIterations = std::max(kernelIterations - 1u, 1u);
 				}
 			}
-		} catch (cl::Error err) {
-			OCLTOY_LOG("RenderThreadImpl OpenCL ERROR: " << err.what() << "(" << OCLErrorString(err.err()) << ")");
-		} catch (std::runtime_error err) {
-			OCLTOY_LOG("RenderThreadImpl RUNTIME ERROR: " << err.what());
-		} catch (std::exception err) {
-			OCLTOY_LOG("RenderThreadImpl ERROR: " << err.what());
-		}
+		//} catch (cl::Error err) {
+		//	OCLTOY_LOG("RenderThreadImpl OpenCL ERROR: " << err.what() << "(" << OCLErrorString(err.err()) << ")");
+		//} catch (std::runtime_error err) {
+		//	OCLTOY_LOG("RenderThreadImpl RUNTIME ERROR: " << err.what());
+		//} catch (std::exception err) {
+		//	OCLTOY_LOG("RenderThreadImpl ERROR: " << err.what());
+		//}
 	}
 
 	std::vector<cl::Buffer *> samplesBuff;
