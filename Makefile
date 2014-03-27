@@ -179,7 +179,7 @@ juliagpu_sample_osx:
 		-D__EMSCRIPTEN__ \
 		-I../common/ \
 		-I../../externs/include/ \
-		-I ./ -I $(EMCC)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
+		-I./ -I$(EMSCRIPTEN_ROOT)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
 		-lboost_filesystem-mt -lboost_program_options-mt \
 		-o juliagpu.out
 		
@@ -192,7 +192,7 @@ smallptgpu_sample_osx:
 		-D__EMSCRIPTEN__ \
 		-I../common/ \
 		-I../../externs/include/ \
-		-I ./ -I $(EMCC)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
+		-I./ -I$(EMSCRIPTEN_ROOT)/system/include/ -framework OpenCL -framework OpenGL -framework GLUT \
 		-lboost_filesystem-mt -lboost_program_options-mt \
 		-o smallptgpu.out
 
