@@ -192,7 +192,7 @@ clean:
 	mkdir -p bin/
 	mkdir -p tmp/
 	cp build/memoryprofiler.js tmp/ && cp build/settings.js tmp/ && cp build/index.html tmp/
-	rm -rf js/
+	rm -rf build/
 	mkdir -p build/
 	cp tmp/memoryprofiler.js build/ && cp tmp/settings.js build/ && cp tmp/index.html build/
 	rm -rf tmp/
