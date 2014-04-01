@@ -149,7 +149,7 @@ protected:
 		boost::program_options::options_description opts("SmallPTGPU options");
 
 		opts.add_options()
-			("kernel,k", boost::program_options::value<std::string>()->default_value("preprocessed_rendering_kernel.cl"),
+			("kernel,k", boost::program_options::value<std::string>()->default_value("preprocessed_rendering_kernel_smallpt.cl"),
 				"OpenCL kernel file name")
 			("scene,n", boost::program_options::value<std::string>()->default_value("scenes/cornell_fog.scn"),
 				"Filename of the scene to render")
