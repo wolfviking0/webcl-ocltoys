@@ -166,6 +166,7 @@ all_2: \
 	mandelgpu_sample
 
 all_3: \
+	smallptgpu_sample
 
 # Create build folder is necessary))
 mkdir:
@@ -196,5 +197,5 @@ clean:
 	mkdir -p build/
 	cp tmp/memoryprofiler.js build/ && cp tmp/settings.js build/ && cp tmp/index.html build/
 	rm -rf tmp/
-	../emscripten/emcc --clear-cache
+	$(EMSCRIPTEN_ROOT)/emcc --clear-cache
 
