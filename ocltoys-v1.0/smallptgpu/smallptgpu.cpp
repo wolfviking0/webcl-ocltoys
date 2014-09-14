@@ -58,19 +58,19 @@ static float VertexPos[4][2]            = { { -1.0f, -1.0f },
                                             { -1.0f, +1.0f } };
 static float TexCoords[4][2];
 
-static void CreateTexture(unsigned int width, unsigned int height) {    
+static void CreateTexture(unsigned int width, unsigned int height) {
     if(TextureId)
         glDeleteTextures(1, &TextureId);
     TextureId = 0;
-    
+
     printf("Creating Texture %d x %d...\n", width, height);
-    
+
 #ifndef __EMSCRIPTEN__
     glActiveTextureARB(ActiveTextureUnit);
 #else
     glActiveTexture(ActiveTextureUnit);
 #endif
-    
+
     glGenTextures(1, &TextureId);
     glBindTexture(TextureTarget, TextureId);
 
@@ -128,7 +128,7 @@ public:
 		defaultVolumeSigmaA = 0.f;
 
 		pixelsBuff = NULL;
-		
+
 		const float gamma = 2.2f;
 		float x = 0.f;
 		const float dx = 1.f / GAMMA_TABLE_SIZE;
@@ -138,7 +138,7 @@ public:
 
 	virtual ~SmallPTGPU() {
 		FreeBuffers();
-		
+
 		for (unsigned int i = 0; i < selectedDevices.size(); ++i)
 			delete kernelsSmallPT[i];
 		delete kernelToneMapping;
@@ -270,7 +270,7 @@ protected:
 			globalSampleSec += sampleSec[i];
 			globalPass += currentSample[i] + 1;
 		}
-		
+
 		const std::string captionString = boost::str(boost::format("[Pass %d][%.1fM Sample/sec]") %
 				globalPass % (globalSampleSec / 1000000.0));
 
@@ -379,7 +379,7 @@ protected:
 				break;
 			case 'c':
 				printCaption = (!printCaption);
-				break;				
+				break;
 			case 'a': {
 				Vec dir = camera.x;
 				vnorm(dir);
@@ -595,11 +595,11 @@ private:
 		ss << std::scientific <<
 				"-DPARAM_MAX_DEPTH=" << maxDepth << " "
 				"-DPARAM_DEFAULT_SIGMA_S=" << defaultVolumeSigmaS << "f "
-				"-DPARAM_DEFAULT_SIGMA_A=" << defaultVolumeSigmaA << "f ";
+				"-DPARAM_DEFAULT_SIGMA_A=" << defaultVolumeSigmaA << "f";
 
 		std::string opts = ss.str();
 		OCLTOY_LOG("Kernel parameters: " << opts);
-			
+
 		// Compile the kernel for each device
 		kernelsSmallPT.resize(selectedDevices.size(), NULL);
 		kernelsWorkGroupSize.resize(selectedDevices.size(), 0);
@@ -629,7 +629,7 @@ private:
 			if ((selectedDevices.size() == 1) && (i == 0))
 				kernelToneMapping = new cl::Kernel(program, "ToneMapping");
 		}
-		
+
 		//----------------------------------------------------------------------
 		// Allocate buffer
 		//----------------------------------------------------------------------
@@ -648,7 +648,7 @@ private:
 
 	void FreeBuffers() {
 		for (unsigned int i = 0; i < selectedDevices.size(); ++i) {
-			FreeOCLBuffer(0, &samplesBuff[i]);			
+			FreeOCLBuffer(0, &samplesBuff[i]);
 			delete[] pixels[i];
 			pixels[i] = NULL;
 			FreeOCLBuffer(0, &seedsBuff[i]);
@@ -749,7 +749,7 @@ private:
 		boost::split(sizeArgs, sizeLine, boost::is_any_of("\t "));
 		if (sizeArgs.size() != 2)
 			throw std::runtime_error("Failed to parse sphere count");
-		
+
 		const unsigned int sphereCount = boost::lexical_cast<unsigned int>(sizeArgs[1]);
 		spheres.resize(sphereCount);
 
@@ -1010,7 +1010,7 @@ private:
 			PrintString(GLUT_BITMAP_9_BY_15, deviceString.c_str());
 			offset += 17;
 		}
-		
+
 		#ifndef __EMSCRIPTEN__
 		glDisable(GL_BLEND);
 		#endif
